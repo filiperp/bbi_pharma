@@ -1,0 +1,8 @@
+D:\Alteryx\MacroCli\MacroCli\bin\Debug\MacroCli.exe.config
+D:\Alteryx\MacroCli\MacroCli\bin\Debug\MacroCli.exe
+D:\Alteryx\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
+D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
+D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
+D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.exe
+D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
+D:\Alteryx\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
