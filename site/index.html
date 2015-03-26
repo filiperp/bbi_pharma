@@ -17,8 +17,16 @@
 		<form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
 			<img src="assets/img/logo.png"  style=" width: 100%;height: auto;margin-bottom: 20px;"/>
 			<label style="color:white;">Nome:</label>
-			<input type="text"  name="seller" style="width:100%; margin-bottom:10px;font-size:20px;"/>
-			<input type="date" name="date" style="width:100%; margin-bottom:10px;font-size:20px;"/>
+			<input type="text"  name="seller" style="width:97%; margin-bottom:10px;font-size:20px;"/>
+
+			<div style="color:white;width: 33%;display: inline-block;">Dia:</div>
+			<div style="color:white;width: 33%;display: inline-block;">Mês:</div>
+			<div style="color:white;width: 30%;display: inline-block;">Ano:</div>
+
+			<input type="text" name="day" style="width:30%; margin-bottom:10px;font-size:20px;"/>
+			<input type="text" name="month" style="width:30%; margin-bottom:10px;font-size:20px;"/>
+			<input type="text" name="year" style="width:30%; margin-bottom:10px;font-size:20px;"/>
+			<label style="color:white;">Escolha o Laboratório:</label>
 			<select name="lablist" style="width:100%; margin-bottom:10px;font-size:20px;">
 			<option value="lab1">Laboratório 1</option>
 			<option value="lab2">Laboratório 2</option>
