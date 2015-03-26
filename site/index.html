@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Mini Ajax File Upload Form</title>
+
+		<!-- Google web fonts -->
+		<link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
+
+		<!-- The main CSS file -->
+		<link href="assets/css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
+			<img src="assets/img/logo.png"  style=" width: 100%;height: auto;margin-bottom: 20px;"/>
+			<label style="color:white;">Nome:</label>
+			<input type="text"  name="seller" style="width:100%; margin-bottom:10px;font-size:20px;"/>
+			<input type="date" name="date" style="width:100%; margin-bottom:10px;font-size:20px;"/>
+			<select name="lablist" style="width:100%; margin-bottom:10px;font-size:20px;">
+			<option value="lab1">Laboratório 1</option>
+			<option value="lab2">Laboratório 2</option>
+			<option value="lab3">Laboratório 3</option>
+			<option value="lab4">Laboratório 4</option>
+			
+			</select>
+			<div id="drop">
+				Arraste Aqui
+
+				<a>Procurar</a>
+				<input type="file" name="upl" multiple />
+			</div>
+
+			<ul>
+				<!-- The file uploads will be shown here -->
+			</ul>
+
+		</form>
+
+		<footer>
+		2015 ® BBI Solutions
+           <!--  <h2><a href="http://tutorialzine.com/2013/05/mini-ajax-file-upload-form/"><i>Tutorial:</i> Mini Ajax File Upload Form</a></h2>
+            <div id="tzine-actions">
+            	
+	            <a id="tzine-download" href="http://tutorialzine.com/2013/05/mini-ajax-file-upload-form/" title="Download This Example!">Download</a>
+            </div> -->
+        </footer>
+        
+		<!-- JavaScript Includes -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="assets/js/jquery.knob.js"></script>
+
+		<!-- jQuery File Upload Dependencies -->
+		<script src="assets/js/jquery.ui.widget.js"></script>
+		<script src="assets/js/jquery.iframe-transport.js"></script>
+		<script src="assets/js/jquery.fileupload.js"></script>
+		
+		<!-- Our main JS file -->
+		<script src="assets/js/script.js"></script>
+
+
+		<!-- Only used for the demos. Please ignore and remove. -
+       <script src="http://cdn.tutorialzine.com/misc/enhance/v1.js" async></script>
+       -->
+	</body>
+</html>

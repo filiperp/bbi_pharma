@@ -6,3 +6,11 @@ D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
 D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.exe
 D:\Alteryx\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
 D:\Alteryx\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
+D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.config
+D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
+D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe
+D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
+D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe
+D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
+D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
+D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache

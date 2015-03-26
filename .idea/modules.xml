@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/MacroCli/MacroCli.iml" filepath="$PROJECT_DIR$/MacroCli/MacroCli.iml" />
       <module fileurl="file://$PROJECT_DIR$/site/site.iml" filepath="$PROJECT_DIR$/site/site.iml" />
     </modules>
   </component>

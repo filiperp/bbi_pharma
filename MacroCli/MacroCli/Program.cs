@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Data;
 using System.Globalization;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace MacroCli
     {
         static MySqlConnection mConn;
 
-        static string BASE_PATH = "D:\\Alteryx\\MacroCli\\doc\\";
-        static bool TRACING = false;
+        static string BASE_PATH = "c:\\" ;
+        static bool TRACING = true;
 
 
 
@@ -32,19 +33,30 @@ namespace MacroCli
             {
                 Console.WriteLine(msg);
 
-
+              //  Console.ReadKey();
             }
             DateTime d = DateTime.Now;
 
             string _d = d.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
             // Compose a string that consists of three lines.
             string lines = _d + " - " + msg;
+            System.IO.StreamWriter file;
+            if (!File.Exists(BASE_PATH + "log.txt"))
+            {
+               file = new System.IO.StreamWriter(BASE_PATH + "log.txt");
+               
+            }
+            else
+            {
+                 file = File.AppendText(BASE_PATH + "log.txt");
+            }
 
-            // Write the string to a file.
-            System.IO.StreamWriter file = new System.IO.StreamWriter(BASE_PATH + "log.txt");
             file.WriteLine(lines);
 
             file.Close();
+
+            // Write the string to a file.
+           
         }
         public static void log(string user, string id, string message, string action)
         {
@@ -52,7 +64,7 @@ namespace MacroCli
             if (TRACING)
             {
                 Console.WriteLine("{0}-{1}-{2}-{3}", user, id, message, action);
-
+               // Console.ReadKey();
             }
             bool logged = false;
 
@@ -120,7 +132,7 @@ namespace MacroCli
 
         }
 
-        static int createStack(string user, string distributor, DateTime period)
+        static int createStack(string user, string distributor, DateTime period,string pathorigem, string pathdestino)
         {
 
             int res = -1;
@@ -131,7 +143,9 @@ namespace MacroCli
                     // mConn.Open();
                     MySqlCommand command = new MySqlCommand();
                     string _period = period.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-                    string SQL = "INSERT INTO stack(id,user,distributor,date,period)VALUES(null,'" + user + "','" + distributor + "',now(),'" + _period + "');";
+                    pathorigem = pathorigem.Replace("\\\\", "/");
+                    pathdestino = pathdestino.Replace("\\\\", "/");
+                    string SQL = "INSERT INTO stack(id,user,distributor,date,period,pathorigem,pathdestino,status)VALUES(null,'" + user + "','" + distributor + "',now(),'" + _period + "','" + pathorigem + "','" + pathdestino + "',1);";
                     errorLog(SQL);
                     command.CommandText = SQL;
                     command.Connection = mConn;
@@ -154,7 +168,7 @@ namespace MacroCli
                 }
                 catch (Exception ex)
                 {
-                    log(user, "", "ERRO AO CRIAR STACK", "createStack");
+                    log(user, "", "ERRO AO CRIAR STACK" + ex.Message, "createStack");
 
                 }
                 finally
@@ -351,7 +365,7 @@ namespace MacroCli
                     //  workbook.Close(null, null, null);
 
 
-                    log("user", "id", "message", "action");
+                  
                     excel.Workbooks.Close();
                     excel.Quit();
 
@@ -391,18 +405,33 @@ namespace MacroCli
             //  string output = args[1];
             //  string macroPath = args[2];
 
-            input = "D:\\Alteryx\\MacroCli\\doc\\american_farma.xls";
-            output = "D:\\Alteryx\\MacroCli\\doc\\american_farma_out.xlsx";
-            macroPath = "D:\\Alteryx\\MacroCli\\doc\\american_farma.vbs";
-            user = "user";
-            distributor = "distributor";
-            date = DateTime.ParseExact("25/06/1983", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            //input = BASE_PATH + "american_farma.xls";
+            //output = BASE_PATH + "american_farma_out.xlsx";
+            //macroPath = BASE_PATH + "american_farma.vbs";
+            //user = "user";
+            //distributor = "distributor";
+            //date = DateTime.ParseExact("25/06/1983", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            //year = date.Year;
+            //month = date.Month;
+            //day = date.Day;
+            //stackID = createStack(user, distributor, date, input, output);
+            //listITems = runVB(input, output, macroPath, distributor, year, month, day, stackID, user);
+
+
+            input = args[0];
+            output = args[1];
+            macroPath = args[2];
+            user = args[3];
+            distributor = args[4];
+            date = DateTime.ParseExact(args[5], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             year = date.Year;
             month = date.Month;
             day = date.Day;
-            stackID = createStack(user, distributor, date);
+            stackID = createStack(user, distributor, date, input, output);
             listITems = runVB(input, output, macroPath, distributor, year, month, day, stackID, user);
-            errorLog(listITems.Count.ToString()+ "vvvvv");
+
+
+            //errorLog(listITems.Count.ToString()+ "vvvvv");
 
             bool saved = false;
 
