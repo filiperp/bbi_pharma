@@ -2,6 +2,7 @@
   
   
   Call Macro (31,3,2015, "La Cucaracha")
+
 End Sub
 
 
@@ -12,8 +13,6 @@ End Sub
 Application.DisplayAlerts = False
 ' Sheets("Template").Delete
 ' Sheets("output_bbi").Delete
-
-
 
     'Renomeando sheet do Centro de Distribuição'
     	
@@ -99,163 +98,160 @@ Application.DisplayAlerts = False
         Selection.EntireColumn.Insert
         ActiveCell.FormulaR1C1 = "Mes_01"
 
-        'Colando dados do CD no Template'
-
-        'Nome do CD'
-
-        Sheets("Dados_CD").Select
-        Range("A2").Select
-        Selection.End(xlDown).Select
-        Range("A65536").Select
-        Selection.End(xlUp).Select
-        Range(ActiveCell, "A2").Select
-        With Selection.Copy
-        Sheets("Template").Select
-        Range("A2").Select
-        Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        '----------------------------------------------------Colando dados do CD no Template----------------------------------------------------'
 
         'Descrição do Produto'
 
         Sheets("Dados_CD").Select
-        Range("G2").Select
-        Selection.End(xlDown).Select
-        Range("G65536").Select
-        Selection.End(xlUp).Select
-        Range(ActiveCell, "G2").Select
+        Range("B4").Select
+        Range(Selection, Selection.End(xlDown)).Select
         With Selection.Copy
         Sheets("Template").Select
         Range("B2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
         End With
 
-        'Venda Atual'
+        'Nome do CD'
 
         Sheets("Dados_CD").Select
-        Range("K2").Select
-        Selection.End(xlDown).Select
-        Range("K65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "K2").Select
-        With Selection.Copy
+        Range("A3").Copy
         Sheets("Template").Select
-        Range("L2").Select
-        Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        Range("A2").Select
+        
+        Do while IsEmpty(activecell.offset(0,1)) = False
+
+
+            Selection.PasteSpecial Paste:=xlPasteValues
+            activecell.offset(1,0).select
+
+        Loop
+
+        'Venda Atual'
+
+        'contador para saber quantas linhas serão copiadas'
+
+        Sheets("Dados_CD").Select
+
+        Dim j As Integer
+
+        j = 4
+        
+            Do While Cells(j, 2) <> ""
+            
+                If Cells(j, 2) <> "" Then
+
+                    if cells(j,7) = "" then 
+                        cells(j,7).value = "-" 
+                    End if
+                    if cells(j,8) = "" then 
+                        cells(j,8).value = "-" 
+                    End if
+                    if cells(j,9) = "" then 
+                        cells(j,9).value = "-" 
+                    End if
+                    if cells(j,10) = "" then
+                        cells(j,10).value = "-" 
+                     End if
+                    if cells(j,11) = "" then
+                        cells(j,11).value = "-" 
+                     End if
+                    if cells(j,12) = "" then
+                        cells(j,12).value = "-" 
+                     End if
+                    if cells(j,13) = "" then
+                        cells(j,13).value = "-" 
+                     End if                    
+                    if cells(j,14) = "" then
+                        cells(j,14).value = "-" 
+                     End if                    
+                    if cells(j,15) = "" then
+                        cells(j,15).value = "-" 
+                    End if                    
+                
+                    j = j + 1
+                End If
+            Loop
+        j = j + 1     
+
+
+            Range(Cells(4,11),cells(j,11)).Copy
+            Sheets("Template").Select
+            Range("L2").Select
+            Selection.PasteSpecial Paste:=xlPasteValues
+
 
         'Venda Mes_03'
 
         Sheets("Dados_CD").Select
-        Range("N2").Select
-        Selection.End(xlDown).Select
-        Range("N65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "N2").Select
-        With Selection.Copy
+        Range(Cells(4,7),cells(j,7)).Copy
         Sheets("Template").Select
         Range("P2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+      
 
         'Venda Mes_02'
 
         Sheets("Dados_CD").Select
-        Range("M2").Select
-        Selection.End(xlDown).Select
-        Range("M65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "M2").Select
-        With Selection.Copy
+        Range(Cells(4,9),cells(j,9)).Copy
         Sheets("Template").Select
         Range("Q2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        
 
         'Venda Mes_01'
 
         Sheets("Dados_CD").Select
-        Range("L2").Select
-        Selection.End(xlDown).Select
-        Range("L65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "L2").Select
-        With Selection.Copy
+        Range(Cells(4,10),cells(j,10)).Copy
         Sheets("Template").Select
         Range("R2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
-
+        
         'Estoque Atual'
 
         Sheets("Dados_CD").Select
-        Range("O2").Select
-        Selection.End(xlDown).Select
-        Range("O65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "O2").Select
-        With Selection.Copy
+        Range(Cells(4,12),cells(j,12)).Copy
         Sheets("Template").Select
         Range("D2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        
 
         'Estoque Trânsito'
 
         Sheets("Dados_CD").Select
-        Range("P2").Select
-        Selection.End(xlDown).Select
-        Range("P65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "P2").Select
-        With Selection.Copy
+        Range(Cells(4,15),cells(j,15)).Copy
         Sheets("Template").Select
         Range("E2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        
 
-        'Estoque Pedido'
+        'Estoque Pendente'
 
         Sheets("Dados_CD").Select
-        Range("Q2").Select
-        Selection.End(xlDown).Select
-        Range("Q65536").Select
-        Selection.End(xlUp).Select
-        ActiveCell.Offset(-1, 0).Select
-        Range(ActiveCell, "Q2").Select
-        With Selection.Copy
+        Range(Cells(4,14),cells(j,14)).Copy
         Sheets("Template").Select
         Range("F2").Select
         Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        
 
         'Estoque Total'
 
-        Sheets("Dados_CD").Select
-        Range("R2").Select
-        Selection.End(xlDown).Select
-        Range("R65536").Select
-        Selection.End(xlUp).Select
-        Range(ActiveCell, "R2").Select
-        With Selection.Copy
-        Sheets("Template").Select
-        Range("G2").Select
-        Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+        'Sheets("Dados_CD").Select
+        'Range("R2").Select
+        'Selection.End(xlDown).Select
+        'Range("R65536").Select
+        'Selection.End(xlUp).Select
+        'Range(ActiveCell, "R2").Select
+        'With Selection.Copy
+        'Sheets("Template").Select
+        'Range("G2").Select
+        'Selection.PasteSpecial Paste:=xlPasteValues
+        'End With
 
         'Código EAN'
 
         Sheets("Dados_CD").Select
-        Range("F2").Select
-        Selection.End(xlDown).Select
-        Range("F65536").Select
-        Selection.End(xlUp).Select
-        Range(ActiveCell, "F2").Select
+        Range("C4").Select
+        Range(Selection, Selection.End(xlDown)).Select
         With Selection.Copy
         Sheets("Template").Select
         Range("J2").Select
@@ -264,17 +260,17 @@ Application.DisplayAlerts = False
 
         'Noeme Distribuidor'
 
-        Sheets("Dados_CD").Select
-        Range("B2").Select
-        Selection.End(xlDown).Select
-        Range("B65536").Select
-        Selection.End(xlUp).Select
-        Range(ActiveCell, "B2").Select
-        With Selection.Copy
-        Sheets("Template").Select
-        Range("K2").Select
-        Selection.PasteSpecial Paste:=xlPasteValues
-        End With
+       ' 'Sheets("Dados_CD").Select
+       ' 'Range("B2").Select
+       ' 'Selection.End(xlDown).Select
+       ' 'Range("B65536").Select
+       ' 'Selection.End(xlUp).Select
+       ' 'Range(ActiveCell, "B2").Select
+       ' 'With Selection.Copy
+       ' 'Sheets("Template").Select
+       ' 'Range("K2").Select
+       ' 'Selection.PasteSpecial Paste:=xlPasteValues
+       ' 'End With
 
         'Calculando a média de vendas'
 
@@ -288,10 +284,27 @@ Application.DisplayAlerts = False
 
         Loop
 
-        'Copiando os valores da média'
+        'CALCULANDO ESTOQUE TOTAL'
+
+        range("G2").Select
+
+        Do while IsEmpty(activecell.offset(0,-5)) = False
+
+
+            activecell.FormulaR1C1 = "=sum(RC[-1],RC[-2],RC[-3])"
+            activecell.offset(1,0).select
+
+        Loop
+
+        'Copiando os valores da média e da soma'
 
         Range("C:C").Copy
         range("C:C").PasteSpecial xlPasteValues
+
+        Range("G:G").Copy
+        range("G:G").PasteSpecial xlPasteValues
+
+
 
         'Inserindo Nome do Arquivo
 
@@ -348,7 +361,7 @@ Application.DisplayAlerts = False
 
 
     do while cells(x,1) <> ""
-	    cells(x,1).value = distributor
+        cells(x,1).value = distributor
 
         y = 1
 
@@ -402,10 +415,8 @@ Application.DisplayAlerts = False
 
     Loop
 
-	 Sheets("output_bbi").select
-
+     Sheets("output_bbi").select
+   
        
     End Sub
-
-
 
