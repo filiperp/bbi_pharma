@@ -1,0 +1,3 @@
+/Users/frpereira/projects/bbi_pharma/MacroCli/MacroCli/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/frpereira/projects/bbi_pharma/MacroCli/MacroCli/obj/Debug/MacroCli.exe
+/Users/frpereira/projects/bbi_pharma/MacroCli/MacroCli/bin/Debug/MySql.Data.dll
