@@ -76,9 +76,33 @@ namespace MacroCli
 
 
 
-            Program.log("ADMIN", "", "SALVO item: " + this.stackID.ToString(), "save");
 
 
+          //  Log.log("ADMIN", "", "SALVO item: " + this.stackID.ToString(), "save");
+
+
+        }
+
+        public override string ToString()
+        {
+            string res = " ( " +this.stackID.ToString() + "," +
+             "'" + this.nome + "'," +
+             "'" + this.cd + "'," +
+             "'" + this.material + "'," +
+             "" + this.vendaMedia.ToString() + "," +
+             "" + this.estoqueChao.ToString() + "," +
+             "" + this.estoqueTransito.ToString() + "," +
+             "" + this.estoquePendente.ToString() + "," +
+             "" + this.estoqueTotal.ToString() + "," +
+             "" + this.diasChao.ToString() + "," +
+             "" + this.diasTotal.ToString() + "," +
+             "'" + this.ean + "'," +
+             "'" + this.tipo + "'," +
+             "" + this.valor.ToString() + "," +
+             "'" + this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) +
+             "');";
+
+            return res;
         }
 
 

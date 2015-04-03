@@ -14,3 +14,15 @@ D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe
 D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
 D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
 D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.config
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.manifest
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.application
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe.manifest
+\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.application

@@ -18,121 +18,51 @@ namespace MacroCli
 {
     class Program
     {
-        static MySqlConnection mConn;
-
-        static string BASE_PATH = "c:\\" ;
-        static bool TRACING = true;
 
 
-
-
-
-        public static void errorLog(string msg)
-        {
-            if (TRACING)
-            {
-                Console.WriteLine(msg);
-
-              //  Console.ReadKey();
-            }
-            DateTime d = DateTime.Now;
-
-            string _d = d.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-            // Compose a string that consists of three lines.
-            string lines = _d + " - " + msg;
-            System.IO.StreamWriter file;
-            if (!File.Exists(BASE_PATH + "log.txt"))
-            {
-               file = new System.IO.StreamWriter(BASE_PATH + "log.txt");
-               
-            }
-            else
-            {
-                 file = File.AppendText(BASE_PATH + "log.txt");
-            }
-
-            file.WriteLine(lines);
-
-            file.Close();
-
-            // Write the string to a file.
-           
-        }
-        public static void log(string user, string id, string message, string action)
+        static void Main(string[] args)
         {
 
-            if (TRACING)
-            {
-                Console.WriteLine("{0}-{1}-{2}-{3}", user, id, message, action);
-               // Console.ReadKey();
-            }
-            bool logged = false;
+            Data.resolveParams(args);
 
-            while (!logged)
+            Data.stackID = createStack(Data.user, Data.distributor, Data.date, Data.inputPath, Data.outputPath);
+            Data.listITems = runVBE(Data.inputPath, Data.outputPath, Data.macroPath, Data.distributor, Data.year, Data.month, Data.day, Data.stackID, Data.user);
+            //errorLog(listITems.Count.ToString()+ "vvvvv");
+            Log.log(" Salvando linhas.:"+ Data.listITems.Count, Data.stackID.ToString());
+            bool saved = false;
+            int i = 0;
+            while (!saved)
             {
                 try
                 {
-                    // mConn.Open();
-                    MySqlCommand command = new MySqlCommand();
-                    string SQL = "INSERT INTO pharma.log(log_id,log_date,log_user,log_import,log_action,log_msg)VALUES(null,now(),'" + user +
-                        "','" + id + "','" + action + "','" + message + "');";
-                    command.CommandText = SQL;
-                    command.Connection = mConn;
-                    command.ExecuteNonQuery();
+                  
+                    for ( i = 0; i < Data.listITems.Count; i++)
+                    {
+                        StackItem item = Data.listITems[i];
+                        item.save(Config.getConn());
+                    }
+
+                    saved = true;
+                }
+                catch (Exception e)
+                {
                     // mConn.Close();
-                    logged = true;
+                    Log.log(" Erro ao salvar linhas: "+i.ToString() +"->"  + e.Message);
+                    clearStackList(Data.stackID);
 
                 }
-                catch (Exception ex)
-                {
-                    errorLog("Error: " + ex.ToString());
-                }
-                finally
-                {
-                    //  mConn.Close();
-                }
-
             }
+
+
+            Log.log(" Linas Salvas:", Data.stackID.ToString());
+            closeExcelProcess();
+
 
 
 
         }
 
-        public static void clearStackList(int stackID)
-        {
-
-            bool logged = false;
-
-            while (!logged)
-            {
-                try
-                {
-                    //  mConn.Open();
-                    MySqlCommand command = new MySqlCommand();
-                    string SQL = "delete from stackitem where stackID= " + stackID.ToString();
-                    command.CommandText = SQL;
-                    command.Connection = mConn;
-                    command.ExecuteNonQuery();
-                    // mConn.Close();
-                    logged = true;
-
-                }
-                catch (Exception ex)
-                {
-                    errorLog("Error: " + ex.ToString());
-                }
-                finally
-                {
-                    //  mConn.Close();
-                }
-
-            }
-
-
-
-        }
-
-        static int createStack(string user, string distributor, DateTime period,string pathorigem, string pathdestino)
+        static int createStack(string user, string distributor, DateTime period, string pathorigem, string pathdestino)
         {
 
             int res = -1;
@@ -140,336 +70,289 @@ namespace MacroCli
             {
                 try
                 {
+                    int aux = 0;
                     // mConn.Open();
                     MySqlCommand command = new MySqlCommand();
                     string _period = period.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-                    pathorigem = pathorigem.Replace("\\\\", "/");
-                    pathdestino = pathdestino.Replace("\\\\", "/");
+                    pathorigem = pathorigem.Replace("\\", "/");
+                    pathdestino = pathdestino.Replace("\\", "/");
                     string SQL = "INSERT INTO stack(id,user,distributor,date,period,pathorigem,pathdestino,status)VALUES(null,'" + user + "','" + distributor + "',now(),'" + _period + "','" + pathorigem + "','" + pathdestino + "',1);";
-                    errorLog(SQL);
+                    Log.log(SQL);
                     command.CommandText = SQL;
-                    command.Connection = mConn;
+                    command.Connection = Config.getConn();
                     command.ExecuteNonQuery();
-
                     MySqlDataReader rdr = null;
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = "Select MAX(id) from stack";
-                    cmd.Connection = mConn;
+                    cmd.Connection = Config.getConn();
                     rdr = cmd.ExecuteReader();
-
                     while (rdr.Read())
                     {
-
-                        res = rdr.GetInt32(0);
+                        aux = rdr.GetInt32(0);
                     }
                     rdr.Close();
+                    res = aux;
                     // mConn.Close();
-
                 }
                 catch (Exception ex)
                 {
-                    log(user, "", "ERRO AO CRIAR STACK" + ex.Message, "createStack");
+                    Log.log(user, "", "ERRO AO CRIAR STACK" + ex.Message, "createStack");
 
                 }
-                finally
-                {
-                    // mConn.Close();
-
-                }
+               
             }
 
-            log(user, res.ToString(), "STACK CRIADO", "createStack");
+            Log.log(user, res.ToString(), "STACK CRIADO", "createStack");
             return res;
 
         }
 
 
-        static double toDouble(string value)
-        {
-            double res = 0;
-            try
-            {
-                res = Convert.ToDouble(value.Replace(",", "."));
-            }
-            catch
-            {
-                res = 0;
-            }
-            return res;
-        }
+       
 
 
-        static List<StackItem> IterateRows(Microsoft.Office.Interop.Excel.Worksheet worksheet, int stackID)
-        {
-            worksheet.Columns.ClearFormats();
-            worksheet.Rows.ClearFormats();
+      
 
-            int iTotalColumns = worksheet.UsedRange.Columns.Count;
-            int iTotalRows = worksheet.UsedRange.Rows.Count;
+      
 
-            List<StackItem> res = new List<StackItem>();
-             Microsoft.Office.Interop.Excel.Range cell;
-            Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
-            errorLog("Rows:" + usedRange.Rows.Count);
-            errorLog("Columns:" + usedRange.Columns.Count);
-
-           
+       
 
 
-            try
-            {
+       
 
-                foreach (Microsoft.Office.Interop.Excel.Range row in usedRange.Rows)
-                {
-                    
-                    //Do something with the row.
-                    StackItem item = new StackItem();
-
-                    item.stackID = stackID;
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1,1];                  
-                    item.nome =  (cell.Value2 != null) ? cell.Value2.ToString(): "";
-                   // errorLog(item.nome);
-                    if (item.nome.ToUpper() == "NOME") continue;
-                     
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 2];
-                    item.cd = (cell.Value2 != null) ? cell.Value2.ToString() : "";
-                   // errorLog(item.cd);
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 3];
-                    item.material = (cell.Value2 != null) ? cell.Value2.ToString() : "";
-                   // errorLog(item.material);
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 4];
-                    item.vendaMedia = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                   // errorLog(item.vendaMedia.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 5];
-                    item.estoqueChao = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                  //  errorLog(item.estoqueChao.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 6];
-                    item.estoqueTransito = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                   // errorLog(item.estoqueTransito.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 7];
-                    item.estoquePendente = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                   // errorLog(item.estoquePendente.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 8];
-                    item.estoqueTotal = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                  //  errorLog(item.estoqueTotal.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 9];
-                    item.diasChao = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                   // errorLog(item.diasChao.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 10];
-                    item.diasTotal = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                   // errorLog(item.diasTotal.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 11];
-                    item.ean = (cell.Value2 != null) ? cell.Value2.ToString() : "";
-                   // errorLog(item.ean.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 13];
-                    item.tipo = (cell.Value2 != null) ? cell.Value2.ToString() : "";
-                   // errorLog(item.tipo.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 14];
-                    item.valor = (cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0;
-                  //  errorLog(item.valor.ToString());
-
-                    cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 15];
-                   // errorLog(cell.Value2.ToString());
-                    item.periodo = DateTime.ParseExact("30/12/1899", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    //errorLog(item.periodo.ToShortDateString());
-                   // errorLog("V2"+cell.Value2.ToString());
-                    item.periodo = item.periodo.AddDays((cell.Value2 != null) ? toDouble(cell.Value2.ToString()) : 0);
-                   // errorLog("V#"+item.periodo.ToShortDateString());
-                   //item.periodo = DateTime.ParseExact((cell.Value2 != null) ? cell.Value2.ToString() : "01/01/2015", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                  
-
-                    res.Add(item);
-
-
-                }
-               // Console.ReadKey();
-
-                return res;
-
-            }
-            catch (Exception e)
-            {
-                errorLog("Iterate:0" + e.Message);
-            }
-            return null;
-            
-        }
-        static List<StackItem> runVB(string input, string output, string macroPath, string distributor, int year, int month, int day, int stackID, string user)
+     
+        static List<StackItem> runVBE(string input, string output, string macroPath, string distributor, int year, int month, int day, int stackID, string user)
         {
             List<StackItem> res = null;
-
-            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
-            excel.Visible = false;
-            Microsoft.Office.Interop.Excel.Workbook workbook;
             bool macroRunned = false;
+          
 
             while (!macroRunned)
             {
                 try
                 {
-                    log(user, stackID.ToString(), "inicio MACRO: ", "runVB");
+                    closeExcelProcess();
+
+                    Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                    excel.Visible = false;
+                    Microsoft.Office.Interop.Excel.Workbook workbook;
+
+
+                    Log.log(user, stackID.ToString(), "inicio runVB", "runVB");
                     excel.Visible = false;
                     workbook = excel.Workbooks.Open(input);
                     workbook.ConflictResolution = Microsoft.Office.Interop.Excel.XlSaveConflictResolution.xlLocalSessionChanges;
                     excel.DisplayAlerts = false;
                     excel.Visible = false;
+                    Log.log(user, stackID.ToString(), "arquivo aberto"+ input, "runVB");
                     excel.VBE.ActiveVBProject.VBComponents.Import(macroPath);
-                    log(user, stackID.ToString(), "run MACRO: ", "runVB");
+                    Log.log(user, stackID.ToString(), "macro importada" + macroPath, "runVB");
+
+                  
                     excel.Run("Macro", day, month, year, distributor);
-                    log(user, stackID.ToString(), "acabou run MACRO: ", "runVB");
+                    Log.log(user, stackID.ToString(), "macro rodada ", "runVB");
                     res = IterateRows(workbook.ActiveSheet, stackID);
-                    log(user, stackID.ToString(), "acabou iterate: ", "runVB");
+
+
+                    Log.log(user, stackID.ToString(), "acabou iterate: ", "runVB");
                     workbook.Saved = true;
-                    workbook.SaveAs(output,
-                        Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook,
+                    bool fileSaved = false;
+
+                    while (!fileSaved)
+                    {
+                        try
+                        {
+                            if (File.Exists(output))
+                            {
+                                File.Delete(output);
+                            }
+                            workbook.SaveAs(output,
+                                Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook,
                                 System.Reflection.Missing.Value, System.Reflection.Missing.Value, false, false,
-                                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared, false, false, System.Reflection.Missing.Value,
+                                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, false, false, System.Reflection.Missing.Value,
                                 System.Reflection.Missing.Value, System.Reflection.Missing.Value);
+                            fileSaved = true;
+                        }
+                        catch (Exception ee)
+                        {
+                            Log.log(" Erro ao Salvar: " + ee.Message);
+                        }
+                    }
+                   
+                  
                     workbook.Close(null, null, null);
-                    log(user, stackID.ToString(), "MACRO EXECUTADA", "runVB");
+                    Log.log(user, stackID.ToString(), "MACRO EXECUTADA", "runVB");
                     excel.Workbooks.Close();
                     excel.Quit();
-
-
-
-                    //Console.WriteLine("salvou");
-
 
                     macroRunned = true;
 
                 }
                 catch (Exception e)
                 {
-
-                    log(user, stackID.ToString(), "ERRO NA MACRO: " + e.Message, "runVB");
-
-                    //  macroRunned = true; 
-                    //                throw;
-                }
-                finally
-                {
-
-
-                    //  workbook.Close(null, null, null);
-
-
-                  
-                    excel.Workbooks.Close();
-                    excel.Quit();
-
-                }
-
-                macroRunned = true;
+                    Log.log(user, stackID.ToString(), "ERRO NA MACRO: " + e.Message, "runVB");
+                }               
+              //  macroRunned = true;
             }
             return res;
 
         }
 
-        //INSERT INTO import(id,user,distributor,date,period)VALUES(id,user,distributor,date,period);
-        static void Main(string[] args)
+
+        static List<StackItem> IterateRows(Microsoft.Office.Interop.Excel.Worksheet worksheet, int stackID)
         {
 
-            mConn = new MySqlConnection("Persist Security Info=False;server=localhost;database=pharma;uid=root;server=localhost;uid=root;pwd=Mudar#123");
-            mConn.Open();
-            string input;
-            string output;
-            string macroPath;
-            string user;
-            string distributor;
-            DateTime date;
-            int year;
-            int month;
-            int day;
-            int stackID;
-            List<StackItem> listITems;
+            Log.log(" iniciou ITERATE");
+            List<StackItem> res = null;
+            bool rowsRead = false;
+            StackItem item = null;
+            int line = 0;
 
-            // args = new string[2];
-            ///  args[0] = "asdf" ;
-            // args[1] = "asdfadsf";
-
-
-
-            //  string input = args[0] ;
-            //  string output = args[1];
-            //  string macroPath = args[2];
-
-            //input = BASE_PATH + "american_farma.xls";
-            //output = BASE_PATH + "american_farma_out.xlsx";
-            //macroPath = BASE_PATH + "american_farma.vbs";
-            //user = "user";
-            //distributor = "distributor";
-            //date = DateTime.ParseExact("25/06/1983", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            //year = date.Year;
-            //month = date.Month;
-            //day = date.Day;
-            //stackID = createStack(user, distributor, date, input, output);
-            //listITems = runVB(input, output, macroPath, distributor, year, month, day, stackID, user);
-
-
-            input = args[0];
-            output = args[1];
-            macroPath = args[2];
-            user = args[3];
-            distributor = args[4];
-            date = DateTime.ParseExact(args[5], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            year = date.Year;
-            month = date.Month;
-            day = date.Day;
-            stackID = createStack(user, distributor, date, input, output);
-            listITems = runVB(input, output, macroPath, distributor, year, month, day, stackID, user);
-
-
-            //errorLog(listITems.Count.ToString()+ "vvvvv");
-
-            bool saved = false;
-
-            while (!saved)
+            while (!rowsRead)
             {
+                worksheet.Columns.ClearFormats();
+                worksheet.Rows.ClearFormats();
+
+                //int iTotalColumns = worksheet.UsedRange.Columns.Count;
+                //int iTotalRows = worksheet.UsedRange.Rows.Count;
+                Log.log(" iniciou ITERATE line"+line.ToString());
+                Microsoft.Office.Interop.Excel.Range cell;
+                Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
+                Log.log("Rows:" + usedRange.Rows.Count + " Columns:" + usedRange.Columns.Count);
+
+                line = 0;
+                res = new List<StackItem>();
                 try
                 {
-                    Program.errorLog("item salvoX");
-                    for (int i = 0; i < listITems.Count; i++)
+                    foreach (Microsoft.Office.Interop.Excel.Range row in usedRange.Rows)
                     {
-                        StackItem item = listITems[i];
-                        item.save(mConn);
-                    }
+                        line++;
+                        //Do something with the row.
+                      item= new StackItem();
 
-                    //listITems.ForEach(delegate(StackItem element) { 
-                        Program.errorLog("item salvo");
-                       // element.save(mConn); });
-                    saved = true;
+                        item.stackID = stackID;
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 1];
+                        item.nome = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        // errorLog(item.nome);
+                        if (item.nome.ToUpper() == "NOME") continue;
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 2];
+                        item.cd = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        // errorLog(item.cd);
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 3];
+                        item.material = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        // errorLog(item.material);
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 4];
+                        item.vendaMedia = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        // errorLog(item.vendaMedia.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 5];
+                        item.estoqueChao = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        //  errorLog(item.estoqueChao.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 6];
+                        item.estoqueTransito = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        // errorLog(item.estoqueTransito.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 7];
+                        item.estoquePendente = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        // errorLog(item.estoquePendente.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 8];
+                        item.estoqueTotal = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        //  errorLog(item.estoqueTotal.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 9];
+                        item.diasChao = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        // errorLog(item.diasChao.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 10];
+                        item.diasTotal = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        // errorLog(item.diasTotal.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 11];
+                        item.ean = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        // errorLog(item.ean.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 13];
+                        item.tipo = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        // errorLog(item.tipo.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 14];
+                        item.valor = (cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0;
+                        //  errorLog(item.valor.ToString());
+
+                        cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 15];
+                        // errorLog(cell.Value2.ToString());
+                        item.periodo = DateTime.ParseExact("30/12/1899", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        //errorLog(item.periodo.ToShortDateString());
+                        // errorLog("V2"+cell.Value2.ToString());
+                        item.periodo = item.periodo.AddDays((cell.Value2 != null) ? Config.toDouble(cell.Value2.ToString()) : 0);
+                        // errorLog("V#"+item.periodo.ToShortDateString());
+                        //item.periodo = DateTime.ParseExact((cell.Value2 != null) ? cell.Value2.ToString() : "01/01/2015", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        res.Add(item);
+
+                    }
+                    // Console.ReadKey();
+
+                    rowsRead = true;
                 }
                 catch (Exception e)
                 {
-                    // mConn.Close();
-                    clearStackList(stackID);
-
+                    Log.log("Error on Iterate "  +  item.ToString());
+                    Log.log("Error on Iterate "+line.ToString()+":" + e.Message);
                 }
             }
+          
+            return res;
+
+        }
 
 
 
-            //  Console.ReadKey();
+        public static void clearStackList(int stackID)
+        {
+            bool logged = false;
+            while (!logged)
+            {
+                try
+                {
+                    MySqlCommand command = new MySqlCommand();
+                    string SQL = "delete from stackitem where stackID= " + stackID.ToString();
+                    command.CommandText = SQL;
+                    command.Connection = Config.getConn();
+                    command.ExecuteNonQuery();
+                    logged = true;
+                }
+                catch (Exception ex)
+                {
+                    Log.log("Error clearStackList: " + ex.ToString());
+                }
+            }
+        }
 
-            mConn.Close();
+        public static void closeExcelProcess(){
 
-            //Console.ReadKey();
+            bool closed = false;
 
-
-
-
+            while(!closed){
+                try
+                {
+                    foreach (System.Diagnostics.Process proc in System.Diagnostics.Process.GetProcessesByName("EXCEL.EXE"))
+                    {
+                        proc.Kill();
+                    }
+                    closed = true;
+                }
+                catch (Exception ex)
+                {
+                    Log.log("Erro ao Fechar Processos EXCEL.EXE: "+ ex.Message);
+                }
+            }
+           
 
         }
     }
