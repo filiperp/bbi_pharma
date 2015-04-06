@@ -19,7 +19,7 @@ namespace MacroCli
     {
         private static MySqlConnection mConn = null;
 
-        public  const string LOG_TXT_PATH = "C:\\log.txt";
+        public  const string LOG_TXT_PATH = "C:\\Program Files (x86)\\Ampps\\www\\log.txt";
         public  const string BASE_PATH = "c:\\";
         public  bool TRACING = true;
 

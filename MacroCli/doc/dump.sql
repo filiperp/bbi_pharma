@@ -58,6 +58,9 @@ CREATE TABLE `stack` (
   `distributor` varchar(100) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `period` datetime DEFAULT NULL,
+  `pathorigem` varchar(512) DEFAULT NULL,
+  `pathdestino` varchar(512) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,6 +82,10 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `stackitem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+/*
+stackID,nome,cd,material,vendamedia,estoquechao,estoquetransito,estoquependente,estoquetotal,diaschao,diastotal,ean,tipo,valor,periodo
+*/
+
 CREATE TABLE `stackitem` (
   `stackID` bigint(128) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,

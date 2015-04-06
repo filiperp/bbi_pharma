@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MacroCli.exe" size="33792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MacroCli.exe" size="34304">
       <assemblyIdentity name="MacroCli" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2vW/bkrqiXIDnYctcsgId4MUEUmsgKWwbAt23y/i+Vo=</dsig:DigestValue>
+        <dsig:DigestValue>HriOQqJSk8VEkukkoeHcuEFEAdU508rBuNQWk7EjQtU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

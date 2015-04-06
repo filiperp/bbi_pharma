@@ -22,7 +22,7 @@ namespace MacroCli
 
         static void Main(string[] args)
         {
-
+            //Log.log("versao6");
             Data.resolveParams(args);
 
             Data.stackID = createStack(Data.user, Data.distributor, Data.date, Data.inputPath, Data.outputPath);
@@ -55,6 +55,8 @@ namespace MacroCli
 
 
             Log.log(" Linas Salvas:", Data.stackID.ToString());
+            updateStackStatus(Data.stackID);
+            Log.log("Status atualizado!");
             closeExcelProcess();
 
 
@@ -125,17 +127,46 @@ namespace MacroCli
         {
             List<StackItem> res = null;
             bool macroRunned = false;
-          
+              Microsoft.Office.Interop.Excel.Application excel =null;
+              Microsoft.Office.Interop.Excel.Workbook workbook = null;
+              Microsoft.Office.Interop.Excel.XlSaveAsAccessMode mode = Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange;
 
             while (!macroRunned)
             {
                 try
                 {
+                    //switch (mode){
+                    //    case Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive:
+                    //        mode=Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange;
+                    //        break;
+                    //    case Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange:
+                    //        mode=Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared;
+                    //        break;
+                    //    default:
+                    //        mode=Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive;
+                    //        break;
+                    //}
+                        
+                  
                     closeExcelProcess();
+                    if (excel != null)
+                    {
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
+                        excel=null;
+                    }
+                    if (workbook != null)
+                    {
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                        workbook = null;
 
-                    Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                    }
+
+                    excel = new Microsoft.Office.Interop.Excel.Application();
                     excel.Visible = false;
-                    Microsoft.Office.Interop.Excel.Workbook workbook;
+                  
+                   
+                   
+
 
 
                     Log.log(user, stackID.ToString(), "inicio runVB", "runVB");
@@ -150,12 +181,10 @@ namespace MacroCli
 
                   
                     excel.Run("Macro", day, month, year, distributor);
+                    
                     Log.log(user, stackID.ToString(), "macro rodada ", "runVB");
-                    res = IterateRows(workbook.ActiveSheet, stackID);
-
-
-                    Log.log(user, stackID.ToString(), "acabou iterate: ", "runVB");
-                    workbook.Saved = true;
+                   
+                    //workbook.Saved = true;
                     bool fileSaved = false;
 
                     while (!fileSaved)
@@ -169,8 +198,8 @@ namespace MacroCli
                             workbook.SaveAs(output,
                                 Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook,
                                 System.Reflection.Missing.Value, System.Reflection.Missing.Value, false, false,
-                                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, false, false, System.Reflection.Missing.Value,
-                                System.Reflection.Missing.Value, System.Reflection.Missing.Value);
+                                mode,false, false, System.Reflection.Missing.Value,
+                                System.Reflection.Missing.Value,true);
                             fileSaved = true;
                         }
                         catch (Exception ee)
@@ -178,6 +207,26 @@ namespace MacroCli
                             Log.log(" Erro ao Salvar: " + ee.Message);
                         }
                     }
+
+                    Log.log("Arquivo salvo");
+
+                    bool tryIterate = false;
+                    while (!tryIterate)
+                    {
+                        try
+                        {
+                            Microsoft.Office.Interop.Excel.Worksheet ws = workbook.ActiveSheet;
+                            res = iterateRows(ws, stackID);
+                            Log.log(user, stackID.ToString(), "acabou iterate: ", "runVB");
+                            tryIterate = true;
+                        }
+                        catch (Exception exc)
+                        {
+                            Log.log("Erro ao tentar iterate Program.cs");
+                        }
+
+                    }
+
                    
                   
                     workbook.Close(null, null, null);
@@ -199,7 +248,7 @@ namespace MacroCli
         }
 
 
-        static List<StackItem> IterateRows(Microsoft.Office.Interop.Excel.Worksheet worksheet, int stackID)
+        public static List<StackItem> iterateRows(Microsoft.Office.Interop.Excel.Worksheet worksheet, int stackID)
         {
 
             Log.log(" iniciou ITERATE");
@@ -334,6 +383,27 @@ namespace MacroCli
             }
         }
 
+        public static void updateStackStatus(int stackID)
+        {
+            bool logged = false;
+            while (!logged)
+            {
+                try
+                {
+                    MySqlCommand command = new MySqlCommand();
+                    string SQL = "update stack set status=2 where id= " + stackID.ToString();
+                    command.CommandText = SQL;
+                    command.Connection = Config.getConn();
+                    command.ExecuteNonQuery();
+                    logged = true;
+                }
+                catch (Exception ex)
+                {
+                    Log.log("Error updateStackStatus: " + ex.ToString());
+                }
+            }
+        }
+
         public static void closeExcelProcess(){
 
             bool closed = false;
@@ -344,6 +414,10 @@ namespace MacroCli
                     foreach (System.Diagnostics.Process proc in System.Diagnostics.Process.GetProcessesByName("EXCEL.EXE"))
                     {
                         proc.Kill();
+                    }
+                    foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName("EXCEL"))
+                    {
+                        p.Kill();
                     }
                     closed = true;
                 }
