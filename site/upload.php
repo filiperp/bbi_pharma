@@ -16,9 +16,9 @@ exec('taskkill /F /IM "conhost.exe"',$superOut,$return_var);
 
 $REGISTEREDMACROS = array(
 	"american_farma"=> "American Farma",
-	"anb"=>"ANB",
-	"big_ben"=> "Big Ben",
-	"pacheco"=>"Pacheco"
+	"goyas"=>"Goyas Service",
+	"onofre"=> "Onofre",
+	"profarma"=>"Profarma"
 	);
 
 $labName = $REGISTEREDMACROS[$_POST['lablist']];

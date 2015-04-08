@@ -1,0 +1,10 @@
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe.config
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe.manifest
+Z:\projects\bbi_pharma\site\Debug\MacroCli.application
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe
+Z:\projects\bbi_pharma\site\Debug\MacroCli.pdb
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.csproj.ResolveComReference.cache
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.exe.manifest
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.application
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.exe
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.pdb

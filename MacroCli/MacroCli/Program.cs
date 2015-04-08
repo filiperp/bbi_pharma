@@ -15,7 +15,7 @@ namespace MacroCli
         static void Main(string[] args)
         {
             //Log.log("versao6");
-            clearLog();
+            //clearLog();
             for (int j = 0; j < args.Length; j++)
             {
                 Log.log(" param: " + args[j], j.ToString());
@@ -30,12 +30,13 @@ namespace MacroCli
             int i = 0;
             while (!saved)
             {
+                StackItem item = null;
                 try
                 {
 
                     for (i = 0; i < Data.listITems.Count; i++)
                     {
-                        StackItem item = Data.listITems[i];
+                        item= Data.listITems[i];
                         item.save(Config.getConn());
                     }
 
@@ -45,6 +46,7 @@ namespace MacroCli
                 {
                     // mConn.Close();
                     Log.log(" Erro ao salvar linhas: " + i.ToString() + "->" + e.Message);
+                    if (item!=null)Log.log(item.getSQL());
                     clearStackList(Data.stackID);
 
                 }
@@ -300,16 +302,16 @@ namespace MacroCli
 
                         cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 1];
                         item.distribuidor = (cell.Value2 != null) ? cell.Value2.ToString() : "";
-                    
 
-                        if (item.distribuidor.ToUpper() == "DISTRIBUIDOR") continue;
+
+                        if (item.distribuidor.ToUpper() == "DISTRIBUIDOR" || item.distribuidor.ToUpper() == "NOME") continue;
 
                         cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 2];
                         item.cd = (cell.Value2 != null) ? cell.Value2.ToString() : "";
                     
 
                         cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 3];
-                        item.apresentacao = (cell.Value2 != null) ? cell.Value2.ToString() : "";
+                        item.Apresentacao = (cell.Value2 != null) ? cell.Value2.ToString() : "";
 
                         cell = (Microsoft.Office.Interop.Excel.Range)row.Cells[1, 4];
                         item.ean = (cell.Value2 != null) ? cell.Value2.ToString() : "";

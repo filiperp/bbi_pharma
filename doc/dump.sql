@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 08-Abr-2015 às 07:35
+-- Generation Time: 08-Abr-2015 às 09:07
 -- Versão do servidor: 5.6.23
 -- PHP Version: 5.3.29
 
@@ -17,30 +17,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: pharma
+-- Database: `pharma`
 --
-
 DROP DATABASE IF EXISTS pharma;
-CREATE DATABASE IF NOT EXISTS pharma DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE pharma;
+CREATE DATABASE IF NOT EXISTS `pharma` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `pharma`;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela dp_goya
+-- Estrutura da tabela `dp_goya`
 --
 
-DROP TABLE IF EXISTS dp_goya;
-CREATE TABLE IF NOT EXISTS dp_goya (
-  ean varchar(254) NOT NULL,
-  medicamento varchar(254) NOT NULL
+DROP TABLE IF EXISTS `dp_goya`;
+CREATE TABLE IF NOT EXISTS `dp_goya` (
+  `ean` varchar(254) NOT NULL,
+  `medicamento` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela dp_goya
+-- Extraindo dados da tabela `dp_goya`
 --
 
-INSERT INTO dp_goya (ean, medicamento) VALUES
+INSERT INTO `dp_goya` (`ean`, `medicamento`) VALUES
   ('7896637023375', 'ALOIS 10MG 30 COMP. (C1)'),
   ('7896637024402', 'ALOIS 10MG 60 COMP. (C1)'),
   ('7896637025553', 'ALOIS 10MG 120 COMP.REV. (C1)'),
@@ -115,20 +114,20 @@ INSERT INTO dp_goya (ean, medicamento) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela dp_oficial
+-- Estrutura da tabela `dp_oficial`
 --
 
-DROP TABLE IF EXISTS dp_oficial;
-CREATE TABLE IF NOT EXISTS dp_oficial (
-  ean varchar(254) NOT NULL,
-  medicamento varchar(254) NOT NULL
+DROP TABLE IF EXISTS `dp_oficial`;
+CREATE TABLE IF NOT EXISTS `dp_oficial` (
+  `ean` varchar(254) NOT NULL,
+  `medicamento` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela dp_oficial
+-- Extraindo dados da tabela `dp_oficial`
 --
 
-INSERT INTO dp_oficial (ean, medicamento) VALUES
+INSERT INTO `dp_oficial` (`ean`, `medicamento`) VALUES
   ('7896637023375', 'ALOIS 10MG CPR 1X30'),
   ('7896637024402', 'ALOIS 10MG CPR 1X60'),
   ('7896637025553', 'ALOIS 10MG CPR REV 1X120'),
@@ -211,20 +210,20 @@ INSERT INTO dp_oficial (ean, medicamento) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela dp_profarma
+-- Estrutura da tabela `dp_profarma`
 --
 
-DROP TABLE IF EXISTS dp_profarma;
-CREATE TABLE IF NOT EXISTS dp_profarma (
-  ean varchar(254) NOT NULL,
-  medicamento varchar(254) NOT NULL
+DROP TABLE IF EXISTS `dp_profarma`;
+CREATE TABLE IF NOT EXISTS `dp_profarma` (
+  `ean` varchar(254) NOT NULL,
+  `medicamento` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela dp_profarma
+-- Extraindo dados da tabela `dp_profarma`
 --
 
-INSERT INTO dp_profarma (ean, medicamento) VALUES
+INSERT INTO `dp_profarma` (`ean`, `medicamento`) VALUES
   ('7896637023375', 'ALOIS 10MG C/30'),
   ('7896637024402', 'ALOIS 10MG C/60 COM'),
   ('7896637025553', 'ALOIS 10MG C/120'),
@@ -300,190 +299,190 @@ INSERT INTO dp_profarma (ean, medicamento) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela log
+-- Estrutura da tabela `log`
 --
 
-DROP TABLE IF EXISTS log;
-CREATE TABLE IF NOT EXISTS log (
-  log_id int(11) NOT NULL,
-  log_date datetime DEFAULT NULL,
-  log_user varchar(100) DEFAULT NULL,
-  log_import varchar(50) DEFAULT NULL,
-  log_action varchar(50) DEFAULT NULL,
-  log_msg varchar(500) DEFAULT NULL
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `log_id` int(11) NOT NULL,
+  `log_date` datetime DEFAULT NULL,
+  `log_user` varchar(100) DEFAULT NULL,
+  `log_import` varchar(50) DEFAULT NULL,
+  `log_action` varchar(50) DEFAULT NULL,
+  `log_msg` varchar(500) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela stack
+-- Estrutura da tabela `stack`
 --
 
-DROP TABLE IF EXISTS stack;
-CREATE TABLE IF NOT EXISTS stack (
-  id int(11) NOT NULL,
-  user varchar(50) DEFAULT NULL,
-  distributor varchar(100) DEFAULT NULL,
-  date datetime DEFAULT NULL,
-  period datetime DEFAULT NULL,
-  pathorigem varchar(512) DEFAULT NULL,
-  pathdestino varchar(512) DEFAULT NULL,
-  status int(11) DEFAULT NULL
+DROP TABLE IF EXISTS `stack`;
+CREATE TABLE IF NOT EXISTS `stack` (
+  `id` int(11) NOT NULL,
+  `user` varchar(50) DEFAULT NULL,
+  `distributor` varchar(100) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `period` datetime DEFAULT NULL,
+  `pathorigem` varchar(512) DEFAULT NULL,
+  `pathdestino` varchar(512) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela stackitem
+-- Estrutura da tabela `stackitem`
 --
 
-DROP TABLE IF EXISTS stackitem;
-CREATE TABLE IF NOT EXISTS stackitem (
-  stackID bigint(128) NOT NULL,
-  distribuidor varchar(100) DEFAULT NULL,
-  cd varchar(100) DEFAULT NULL,
-  apresentacao varchar(512) DEFAULT NULL,
-  ean varchar(45) DEFAULT NULL,
-  tipo varchar(45) DEFAULT NULL,
-  info varchar(50) NOT NULL,
-  valor double DEFAULT NULL,
-  periodo datetime DEFAULT NULL
+DROP TABLE IF EXISTS `stackitem`;
+CREATE TABLE IF NOT EXISTS `stackitem` (
+  `stackID` bigint(128) NOT NULL,
+  `distribuidor` varchar(100) DEFAULT NULL,
+  `cd` varchar(100) DEFAULT NULL,
+  `apresentacao` varchar(512) DEFAULT NULL,
+  `ean` varchar(45) DEFAULT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `info` varchar(50) NOT NULL,
+  `valor` double DEFAULT NULL,
+  `periodo` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view view_estoque
+-- Stand-in structure for view `view_estoque`
 --
-DROP VIEW IF EXISTS view_estoque;
-CREATE TABLE IF NOT EXISTS view_estoque (
-   apresentacao varchar(512)
-  ,cd varchar(100)
-  ,distribuidor varchar(100)
-  ,ean varchar(254)
-  ,info varchar(50)
-  ,periodo datetime
-  ,tipo varchar(45)
-  ,valor double
+DROP VIEW IF EXISTS `view_estoque`;
+CREATE TABLE IF NOT EXISTS `view_estoque` (
+   `apresentacao` varchar(512)
+  ,`cd` varchar(100)
+  ,`distribuidor` varchar(100)
+  ,`ean` varchar(254)
+  ,`info` varchar(50)
+  ,`periodo` datetime
+  ,`tipo` varchar(45)
+  ,`valor` double
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view view_estoque_ean
+-- Stand-in structure for view `view_estoque_ean`
 --
-DROP VIEW IF EXISTS view_estoque_ean;
-CREATE TABLE IF NOT EXISTS view_estoque_ean (
-   apresentacao varchar(254)
-  ,cd varchar(100)
-  ,distribuidor varchar(100)
-  ,ean varchar(254)
-  ,info varchar(50)
-  ,periodo datetime
-  ,tipo varchar(45)
-  ,valor double
+DROP VIEW IF EXISTS `view_estoque_ean`;
+CREATE TABLE IF NOT EXISTS `view_estoque_ean` (
+   `apresentacao` varchar(254)
+  ,`cd` varchar(100)
+  ,`distribuidor` varchar(100)
+  ,`ean` varchar(254)
+  ,`info` varchar(50)
+  ,`periodo` datetime
+  ,`tipo` varchar(45)
+  ,`valor` double
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view view_venda
+-- Stand-in structure for view `view_venda`
 --
-DROP VIEW IF EXISTS view_venda;
-CREATE TABLE IF NOT EXISTS view_venda (
-   apresentacao varchar(512)
-  ,cd varchar(100)
-  ,distribuidor varchar(100)
-  ,ean varchar(254)
-  ,info varchar(50)
-  ,periodo datetime
-  ,tipo varchar(45)
-  ,valor double
+DROP VIEW IF EXISTS `view_venda`;
+CREATE TABLE IF NOT EXISTS `view_venda` (
+   `apresentacao` varchar(512)
+  ,`cd` varchar(100)
+  ,`distribuidor` varchar(100)
+  ,`ean` varchar(254)
+  ,`info` varchar(50)
+  ,`periodo` datetime
+  ,`tipo` varchar(45)
+  ,`valor` double
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view view_venda_ean
+-- Stand-in structure for view `view_venda_ean`
 --
-DROP VIEW IF EXISTS view_venda_ean;
-CREATE TABLE IF NOT EXISTS view_venda_ean (
-   apresentacao varchar(254)
-  ,cd varchar(100)
-  ,distribuidor varchar(100)
-  ,ean varchar(254)
-  ,info varchar(50)
-  ,periodo datetime
-  ,tipo varchar(45)
-  ,valor double
+DROP VIEW IF EXISTS `view_venda_ean`;
+CREATE TABLE IF NOT EXISTS `view_venda_ean` (
+   `apresentacao` varchar(254)
+  ,`cd` varchar(100)
+  ,`distribuidor` varchar(100)
+  ,`ean` varchar(254)
+  ,`info` varchar(50)
+  ,`periodo` datetime
+  ,`tipo` varchar(45)
+  ,`valor` double
 );
 
 -- --------------------------------------------------------
 
 --
--- Structure for view view_estoque
+-- Structure for view `view_estoque`
 --
-DROP TABLE IF EXISTS view_estoque;
+DROP TABLE IF EXISTS `view_estoque`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=root@localhost SQL SECURITY DEFINER VIEW view_estoque AS select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,dp_goya.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from (stackitem join dp_goya on((stackitem.apresentacao = dp_goya.medicamento))) where ((ucase(stackitem.distribuidor) = 'GOYAS') and (ucase(stackitem.tipo) = 'ESTOQUE')) union all select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,dp_profarma.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from (stackitem join dp_profarma on((stackitem.apresentacao = dp_profarma.medicamento))) where ((ucase(stackitem.distribuidor) = 'PROFARMA') and (ucase(stackitem.tipo) = 'ESTOQUE')) union all select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,stackitem.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from stackitem where ((ucase(stackitem.distribuidor) not in ('GOYAS','PROFARMA')) and (ucase(stackitem.tipo) = 'ESTOQUE'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_estoque` AS select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`dp_goya`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from (`stackitem` join `dp_goya` on((`stackitem`.`apresentacao` = `dp_goya`.`medicamento`))) where ((ucase(`stackitem`.`distribuidor`) = 'GOYAS') and (ucase(`stackitem`.`tipo`) = 'ESTOQUE')) union all select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`dp_profarma`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from (`stackitem` join `dp_profarma` on((`stackitem`.`apresentacao` = `dp_profarma`.`medicamento`))) where ((ucase(`stackitem`.`distribuidor`) = 'PROFARMA') and (ucase(`stackitem`.`tipo`) = 'ESTOQUE')) union all select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`stackitem`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from `stackitem` where ((ucase(`stackitem`.`distribuidor`) not in ('GOYAS','PROFARMA')) and (ucase(`stackitem`.`tipo`) = 'ESTOQUE'));
 
 -- --------------------------------------------------------
 
 --
--- Structure for view view_estoque_ean
+-- Structure for view `view_estoque_ean`
 --
-DROP TABLE IF EXISTS view_estoque_ean;
+DROP TABLE IF EXISTS `view_estoque_ean`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=root@localhost SQL SECURITY DEFINER VIEW view_estoque_ean AS select dp_oficial.medicamento AS apresentacao,view_estoque.cd AS cd,view_estoque.distribuidor AS distribuidor,dp_oficial.ean AS ean,view_estoque.info AS info,view_estoque.periodo AS periodo,view_estoque.tipo AS tipo,view_estoque.valor AS valor from (view_estoque join dp_oficial on((view_estoque.ean = dp_oficial.ean)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_estoque_ean` AS select `dp_oficial`.`medicamento` AS `apresentacao`,`view_estoque`.`cd` AS `cd`,`view_estoque`.`distribuidor` AS `distribuidor`,`dp_oficial`.`ean` AS `ean`,`view_estoque`.`info` AS `info`,`view_estoque`.`periodo` AS `periodo`,`view_estoque`.`tipo` AS `tipo`,`view_estoque`.`valor` AS `valor` from (`view_estoque` join `dp_oficial` on((`view_estoque`.`ean` = `dp_oficial`.`ean`)));
 
 -- --------------------------------------------------------
 
 --
--- Structure for view view_venda
+-- Structure for view `view_venda`
 --
-DROP TABLE IF EXISTS view_venda;
+DROP TABLE IF EXISTS `view_venda`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=root@localhost SQL SECURITY DEFINER VIEW view_venda AS select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,dp_goya.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from (stackitem join dp_goya on((stackitem.apresentacao = dp_goya.medicamento))) where ((ucase(stackitem.distribuidor) = 'GOYAS') and (ucase(stackitem.tipo) = 'VENDA')) union all select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,dp_profarma.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from (stackitem join dp_profarma on((stackitem.apresentacao = dp_profarma.medicamento))) where ((ucase(stackitem.distribuidor) = 'PROFARMA') and (ucase(stackitem.tipo) = 'VENDA')) union all select stackitem.apresentacao AS apresentacao,stackitem.cd AS cd,stackitem.distribuidor AS distribuidor,stackitem.ean AS ean,stackitem.info AS info,stackitem.periodo AS periodo,stackitem.tipo AS tipo,stackitem.valor AS valor from stackitem where ((ucase(stackitem.distribuidor) not in ('GOYAS','PROFARMA')) and (ucase(stackitem.tipo) = 'VENDA'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_venda` AS select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`dp_goya`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from (`stackitem` join `dp_goya` on((`stackitem`.`apresentacao` = `dp_goya`.`medicamento`))) where ((ucase(`stackitem`.`distribuidor`) = 'GOYAS') and (ucase(`stackitem`.`tipo`) = 'VENDA')) union all select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`dp_profarma`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from (`stackitem` join `dp_profarma` on((`stackitem`.`apresentacao` = `dp_profarma`.`medicamento`))) where ((ucase(`stackitem`.`distribuidor`) = 'PROFARMA') and (ucase(`stackitem`.`tipo`) = 'VENDA')) union all select `stackitem`.`apresentacao` AS `apresentacao`,`stackitem`.`cd` AS `cd`,`stackitem`.`distribuidor` AS `distribuidor`,`stackitem`.`ean` AS `ean`,`stackitem`.`info` AS `info`,`stackitem`.`periodo` AS `periodo`,`stackitem`.`tipo` AS `tipo`,`stackitem`.`valor` AS `valor` from `stackitem` where ((ucase(`stackitem`.`distribuidor`) not in ('GOYAS','PROFARMA')) and (ucase(`stackitem`.`tipo`) = 'VENDA'));
 
 -- --------------------------------------------------------
 
 --
--- Structure for view view_venda_ean
+-- Structure for view `view_venda_ean`
 --
-DROP TABLE IF EXISTS view_venda_ean;
+DROP TABLE IF EXISTS `view_venda_ean`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=root@localhost SQL SECURITY DEFINER VIEW view_venda_ean AS select dp_oficial.medicamento AS apresentacao,view_venda.cd AS cd,view_venda.distribuidor AS distribuidor,dp_oficial.ean AS ean,view_venda.info AS info,view_venda.periodo AS periodo,view_venda.tipo AS tipo,view_venda.valor AS valor from (view_venda join dp_oficial on((view_venda.ean = dp_oficial.ean)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_venda_ean` AS select `dp_oficial`.`medicamento` AS `apresentacao`,`view_venda`.`cd` AS `cd`,`view_venda`.`distribuidor` AS `distribuidor`,`dp_oficial`.`ean` AS `ean`,`view_venda`.`info` AS `info`,`view_venda`.`periodo` AS `periodo`,`view_venda`.`tipo` AS `tipo`,`view_venda`.`valor` AS `valor` from (`view_venda` join `dp_oficial` on((`view_venda`.`ean` = `dp_oficial`.`ean`)));
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table log
+-- Indexes for table `log`
 --
-ALTER TABLE log
-ADD PRIMARY KEY (log_id);
+ALTER TABLE `log`
+ADD PRIMARY KEY (`log_id`);
 
 --
--- Indexes for table stack
+-- Indexes for table `stack`
 --
-ALTER TABLE stack
-ADD PRIMARY KEY (id);
+ALTER TABLE `stack`
+ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table log
+-- AUTO_INCREMENT for table `log`
 --
-ALTER TABLE log
-MODIFY log_id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `log`
+MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table stack
+-- AUTO_INCREMENT for table `stack`
 --
-ALTER TABLE stack
-MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `stack`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

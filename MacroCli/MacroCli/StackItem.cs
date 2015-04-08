@@ -16,7 +16,13 @@ namespace MacroCli
         public int stackID;
         public string distribuidor;
         public string cd;
-        public string apresentacao;
+        private string apresentacao;
+
+        public string Apresentacao
+        {
+            get { return apresentacao.Replace("'",  "" ); }
+            set { apresentacao = value; }
+        }
         public string ean;
         public string tipo;
         public string info;
@@ -33,17 +39,7 @@ namespace MacroCli
 
             // conn.Open();
             MySqlCommand command = new MySqlCommand();
-            string SQL = "INSERT INTO pharma.stackitem(stackID,distribuidor,cd,apresentacao,ean,tipo,info,valor,periodo)VALUES(" +
-                "" + this.stackID.ToString() + "," +
-                "'" + this.distribuidor + "'," +
-                "'" + this.cd + "'," +
-                "'" + this.apresentacao + "'," +
-                "'" + this.ean + "'," +
-                "'" + this.tipo + "'," +
-                "'" + this.info + "'," +
-                "" + this.valor.ToString() + "," +
-                "'" + this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) +
-                "');";
+            string SQL = getSQL();
 
 
             command.CommandText = SQL;
@@ -63,12 +59,28 @@ namespace MacroCli
 
         }
 
+
+        public  string getSQL()
+        {
+            return  "INSERT INTO pharma.stackitem(stackID,distribuidor,cd,apresentacao,ean,tipo,info,valor,periodo)VALUES(" +
+                "" + this.stackID.ToString() + "," +
+                "'" + this.distribuidor + "'," +
+                "'" + this.cd + "'," +
+                "'" + this.Apresentacao + "'," +
+                "'" + this.ean + "'," +
+                "'" + this.tipo + "'," +
+                "'" + this.info + "'," +
+                "" + this.valor.ToString() + "," +
+                "'" + this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) +
+                "');";
+        }
+
         public override string ToString()
         {
             string res = this.stackID.ToString() + ";" +
            this.distribuidor + ";" +
            this.cd + ";" +
-           this.apresentacao + ";" +
+           this.Apresentacao + ";" +
            this.ean + ";" +
 
            this.tipo + ";" +

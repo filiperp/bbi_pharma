@@ -41,4 +41,13 @@ Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe.manifest
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.application
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
-Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.manifest
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.application
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe.config
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe.manifest
+Z:\projects\bbi_pharma\site\Debug\MacroCli.application
+Z:\projects\bbi_pharma\site\Debug\MacroCli.exe
+Z:\projects\bbi_pharma\site\Debug\MacroCli.pdb

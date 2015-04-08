@@ -24,6 +24,10 @@ $total= $row['total'];
 
 
     ?>
+<div id="msgwait" style="align-content: center; text-align: center;display: none">
+    <h3 style="color:#fafafa !important;margin-top:60px;">ENVIANDO DADOS...</h3>
+
+</div>
 
     <form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
         <img src="assets/img/logo.png" style=" width: 100%;height: auto;margin-bottom: 20px;"/>
@@ -43,9 +47,9 @@ $total= $row['total'];
         <label style="color:white;">Escolha o Distribuidor:</label>
         <select name="lablist" style="width:100%; margin-bottom:10px;font-size:20px;">
             <option value="american_farma">American Farma</option>
-            <option value="anb">ANB</option>
-            <option value="big_ben">BIG BENN</option>
-            <option value="pacheco">Pacheco</option>
+            <option value="goyas">Goyas Service</option>
+            <option value="onofre">Onofre</option>
+            <option value="profarma">Profarma</option>
 
 
         </select>
@@ -64,7 +68,7 @@ $total= $row['total'];
           }else{
               ?>
 
-              <h3 style="color:#999999 !important;">Aguarde, há um processo de conversão de mapas em andamento</h3>
+              <h3 style="color:#999999 !important;">Há um processo de conversão de mapas em andamento</h3>
 
 
 
@@ -74,14 +78,15 @@ $total= $row['total'];
           }
         ?>
         <div style="align-content: center; text-align: center">
-            <a href="clear.php" class="lebutton">REINICIALIZAR FERRAMENTA</a>
+            <a href="index.php" class="lebutton">ATUALIZAR PÁGINA</a>
+            <BR>
+            <a href="clear.php" class="lebutton" style="background-color: #BA0000 !important">REINICIALIZAR FERRAMENTA (APAGAR TUDO!)</a>
+
+
         </div>
 
 
     </form>
-<div id="msgwait" style="align-content: center; text-align: center; display: none">
-    <a href="clear.php" class="lebutton">REINICIALIZAR FERRAMENTA</a>
-</div>
 
 
 <footer style="color:white;">
