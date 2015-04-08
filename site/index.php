@@ -7,7 +7,7 @@
 
     <!-- Google web fonts -->
     <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
-
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <!-- The main CSS file -->
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
@@ -35,15 +35,16 @@ $total= $row['total'];
           if($total==0) {
         ?>
         <label style="color:white;">Nome:</label>
-        <input type="text" name="seller" style="width:97%; margin-bottom:10px;font-size:20px;"/>
+        <input type="text" name="seller" style="width:97%; margin-bottom:10px;font-size:20px;" value="Cristiano"/>
 
         <div style="color:white;width: 33%;display: inline-block;">Dia:</div>
         <div style="color:white;width: 33%;display: inline-block;">Mês:</div>
         <div style="color:white;width: 30%;display: inline-block;">Ano:</div>
 
-        <input type="text" name="day" style="width:30%; margin-bottom:10px;font-size:20px;"/>
-        <input type="text" name="month" style="width:30%; margin-bottom:10px;font-size:20px;"/>
-        <input type="text" name="year" style="width:30%; margin-bottom:10px;font-size:20px;"/>
+
+        <input type="number" name="day" min="1" max="31" style="width:30%; margin-bottom:10px;font-size:20px;" value="<?php echo date('d');?>"/>
+        <input type="number" name="month" min="1" max="12" style="width:30%; margin-bottom:10px;font-size:20px;" value="<?php echo date('m');?>"/>
+        <input type="number" name="year" min="2000" max="9000" style="width:30%; margin-bottom:10px;font-size:20px;" value="<?php echo date('Y');?>"/>
         <label style="color:white;">Escolha o Distribuidor:</label>
         <select name="lablist" style="width:100%; margin-bottom:10px;font-size:20px;">
             <option value="american_farma">American Farma</option>

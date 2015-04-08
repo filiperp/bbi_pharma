@@ -161,13 +161,13 @@ namespace MacroCli
 
 
                     Log.log(Data.user, Data.stackID.ToString(), "inicio runVB", "runVB");
-                    excel.Visible = true;
+                    excel.Visible = false;
                     workbook = excel.Workbooks.Open(Data.InputPath);
                     workbook.ConflictResolution = Microsoft.Office.Interop.Excel.XlSaveConflictResolution.xlLocalSessionChanges;
 
 
-                    excel.DisplayAlerts = true;
-                    excel.Visible = true;
+                    excel.DisplayAlerts = false;
+                    excel.Visible = false;
 
                     Log.log(Data.user, Data.stackID.ToString(), "arquivo aberto: " + Data.InputPath, "runVB");
                     excel.VBE.ActiveVBProject.VBComponents.Import(Data.MacroPath);
