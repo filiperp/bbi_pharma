@@ -1,16 +1,6 @@
-﻿using System;
-using System.Data;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using Microsoft.Office.Interop.Excel;
-using MySql.Data.Types;
-using MacroCli;
 
 
 namespace MacroCli
@@ -24,20 +14,16 @@ namespace MacroCli
     class StackItem
     {
         public int stackID;
-        public string nome;
+        public string distribuidor;
         public string cd;
-        public string material;
-        public double vendaMedia;
-        public double estoqueChao;
-        public double estoqueTransito;
-        public double estoquePendente;
-        public double estoqueTotal;
-        public double diasChao;
-        public double diasTotal;
+        public string apresentacao;
         public string ean;
         public string tipo;
+        public string info;
         public double valor;
         public DateTime periodo;
+
+
 
         public void save(MySqlConnection conn)
         {
@@ -45,63 +31,50 @@ namespace MacroCli
 
 
 
-           // conn.Open();
+            // conn.Open();
             MySqlCommand command = new MySqlCommand();
-            string SQL = "INSERT INTO pharma.stackitem(stackID,nome,cd,material,vendamedia,estoquechao,estoquetransito,estoquependente,estoquetotal,diaschao,diastotal,ean,tipo,valor,periodo)VALUES(" +
+            string SQL = "INSERT INTO pharma.stackitem(stackID,distribuidor,cd,apresentacao,ean,tipo,info,valor,periodo)VALUES(" +
                 "" + this.stackID.ToString() + "," +
-                "'" + this.nome + "'," +
+                "'" + this.distribuidor + "'," +
                 "'" + this.cd + "'," +
-                "'" + this.material + "'," +
-                "" + this.vendaMedia.ToString() + "," +
-                "" + this.estoqueChao.ToString() + "," +
-                "" + this.estoqueTransito.ToString() + "," +
-                "" + this.estoquePendente.ToString() + "," +
-                "" + this.estoqueTotal.ToString() + "," +
-                "" + this.diasChao.ToString() + "," +
-                "" + this.diasTotal.ToString() + "," +
+                "'" + this.apresentacao + "'," +
                 "'" + this.ean + "'," +
                 "'" + this.tipo + "'," +
+                "'" + this.info + "'," +
                 "" + this.valor.ToString() + "," +
                 "'" + this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) +
                 "');";
-           
-           
-                command.CommandText = SQL;
-                command.Connection = conn;
-                command.ExecuteNonQuery();
-           
-           
-           
-           // conn.Close();
+
+
+            command.CommandText = SQL;
+            command.Connection = conn;
+            command.ExecuteNonQuery();
+
+
+
+            // conn.Close();
 
 
 
 
 
-          //  Log.log("ADMIN", "", "SALVO item: " + this.stackID.ToString(), "save");
+            //  Log.log("ADMIN", "", "SALVO item: " + this.stackID.ToString(), "save");
 
 
         }
 
         public override string ToString()
         {
-            string res = " ( " +this.stackID.ToString() + "," +
-             "'" + this.nome + "'," +
-             "'" + this.cd + "'," +
-             "'" + this.material + "'," +
-             "" + this.vendaMedia.ToString() + "," +
-             "" + this.estoqueChao.ToString() + "," +
-             "" + this.estoqueTransito.ToString() + "," +
-             "" + this.estoquePendente.ToString() + "," +
-             "" + this.estoqueTotal.ToString() + "," +
-             "" + this.diasChao.ToString() + "," +
-             "" + this.diasTotal.ToString() + "," +
-             "'" + this.ean + "'," +
-             "'" + this.tipo + "'," +
-             "" + this.valor.ToString() + "," +
-             "'" + this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) +
-             "');";
+            string res = this.stackID.ToString() + ";" +
+           this.distribuidor + ";" +
+           this.cd + ";" +
+           this.apresentacao + ";" +
+           this.ean + ";" +
 
+           this.tipo + ";" +
+           this.info + ";" +
+           this.valor.ToString() + ";" +
+           this.periodo.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
             return res;
         }
 

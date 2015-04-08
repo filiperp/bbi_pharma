@@ -1,8 +1,5 @@
 <?php
 
-
-$BASEPATH= 'C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\';
-$BASEPATH2= 'C:\\Program Files (x86)\\Ampps\\www\\';
 // A list of permitted file extensions
 $allowed = array('png', 'jpg', 'gif','zip', 'xlsx', 'xls', 'pdf');
 
@@ -27,12 +24,12 @@ $REGISTEREDMACROS = array(
 $labName = $REGISTEREDMACROS[$_POST['lablist']];
 $seller = $_POST['seller'];
 $date = str_pad( $_POST['day'], 2, "0", STR_PAD_LEFT). '/'.str_pad( $_POST['month'], 2, "0", STR_PAD_LEFT). '/'.$_POST['year'] ;
-$input = 'uploads\\\\'.$_FILES['upl']['name'];
+$input = $_FILES['upl']['name'];
 $fileNameWOExt = pathinfo($input,PATHINFO_FILENAME);
-$output = 'ready\\'.$labName.'_'.$seller.'_'.$fileNameWOExt.'.xlsx';
+$output = $labName.'_'.$seller.'_'.$fileNameWOExt.'.xlsx';
 
 
-$macroPath = $BASEPATH.'macros\\\\'.$_POST['lablist']. '.vbs';
+$macroPath = $_POST['lablist']. '.vbs';
 //echo $labName;
 //die();
 
@@ -48,13 +45,13 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 
 	if(move_uploaded_file($_FILES['upl']['tmp_name'], 'uploads/'.$labName.'_'.$seller.'_'.$_FILES['upl']['name'])){
 
-		$input = 'uploads\\\\'.$labName.'_'.$seller.'_'.$_FILES['upl']['name'];
+		$input = $labName.'_'.$seller.'_'.$_FILES['upl']['name'];
         $ex = function_exists('exec');
 
-		$t = '.\\Debug\\MacroCli.exe  "'.$BASEPATH.$input.'"   "'.$BASEPATH2.$output.'"  "'.$macroPath.'" "'.$seller.'" "'.$labName.'" "'.$date.'"  ' ;
+		$t = '.\\Debug\\MacroCli.exe  "'.$input.'"   "'.$output.'"  "'.$macroPath.'" "'.$seller.'" "'.$labName.'" "'.$date.'"  ' ;
 		shell_exec($t);
 
-		echo $leoutput;
+
 		echo '{"status":"success", "l": "'.$t.'", "ex":"'.$ex.'" }';
 		exit;
 

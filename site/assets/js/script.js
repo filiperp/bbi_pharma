@@ -48,10 +48,15 @@ $(function(){
 
             // Automatically upload the file once it is added to the queue
             var jqXHR = data.submit();
+          $('#uplaod').hide();
+           $("#msgwait").show()
+           setTimeout( function(){
+               window.location="/index.php";
+           },3000)
         },
 
         progress: function(e, data){
-
+           // window.location="/index.php";
             // Calculate the completion percentage of the upload
             var progress = parseInt(data.loaded / data.total * 100, 10);
 

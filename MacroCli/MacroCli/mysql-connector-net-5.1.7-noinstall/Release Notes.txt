@@ -1,4 +1,6 @@
-Connector/Net 5.1.5 Release Notes
+[ZoneTransfer]
+ZoneId=3
+e Notes
 ------------------------------------
 
 Welcome to the release notes for Connector/Net 5.1.5

@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MacroCli.exe" size="33792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MacroCli.exe" size="34304">
       <assemblyIdentity name="MacroCli" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2vW/bkrqiXIDnYctcsgId4MUEUmsgKWwbAt23y/i+Vo=</dsig:DigestValue>
+        <dsig:DigestValue>TomIRkG1JDtLnylv2AqUssEkhW0djDNn/JC3+8/XFGw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="278528">
-      <assemblyIdentity name="MySql.Data" version="5.1.7.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="457216">
+      <assemblyIdentity name="MySql.Data" version="6.9.6.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qqvx/GGA6OQaQUaD5wVPzBchB/oT9oekJq2y45vpj5A=</dsig:DigestValue>
+        <dsig:DigestValue>vp/0k3J7s9ugl4aq8lI/oYVJVNPbUyQ7qJjLrWRUSa0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

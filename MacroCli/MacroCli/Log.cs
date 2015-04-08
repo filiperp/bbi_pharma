@@ -1,16 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.IO;
-using System.Data;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using Microsoft.Office.Interop.Excel;
-using MySql.Data.Types;
 namespace MacroCli
 {
     class Log

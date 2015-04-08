@@ -1,16 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Data;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using Microsoft.Office.Interop.Excel;
-using MySql.Data.Types;
 
 
 namespace MacroCli
@@ -19,9 +9,17 @@ namespace MacroCli
     {
         private static MySqlConnection mConn = null;
 
-        public  const string LOG_TXT_PATH = "C:\\Program Files (x86)\\Ampps\\www\\log.txt";
-        public  const string BASE_PATH = "c:\\";
-        public  bool TRACING = true;
+        public static string LOG_TXT_PATH = "C:\\Program Files (x86)\\Ampps\\www\\log.txt";
+        public static string PATH_UPLOAD = @"C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\uploads\\\\";
+        public static string PATH_READY = @"C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\ready\\\\";
+        public static string PATH_MACRO = @"C:\\Program Files (x86)\\Ampps\\www\\macros\\";
+
+        //public static string PATH_UPLOAD = "../uploads/";
+        //public static string PATH_READY = "../ready/";
+        //public static string PATH_MACRO = "../macros/";
+        public static bool TRACING = true;
+
+
 
 
         public  const bool LOG_CONSOLE = false;

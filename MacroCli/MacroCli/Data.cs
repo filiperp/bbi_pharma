@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MacroCli
 {
     class Data
     {
-            public static string inputPath;
-            public static string outputPath;
-            public static string macroPath;
+        public static string InputPath;
+
+
+        public static string OutputPath;
+
+
+        public static string MacroPath;
+
             public static string user;
             public static string distributor;
             public static DateTime date;
@@ -22,9 +24,9 @@ namespace MacroCli
 
         public static void resolveParams(string[] args){
 
-            inputPath = args[0];
-            outputPath = args[1];
-            macroPath = args[2];
+            InputPath = Config.PATH_UPLOAD + args[0];
+            OutputPath = Config.PATH_READY + args[1];
+            MacroPath = Config.PATH_MACRO + args[2];
             user = args[3];
             distributor = args[4];
             date = DateTime.ParseExact(args[5], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
@@ -32,28 +34,18 @@ namespace MacroCli
             month = date.Month;
             day = date.Day;
 
-            //if(args.Length!=5){
-            //    inputPath = Config.BASE_PATH + "american_farma.xls";
-            //    outputPath = Config.BASE_PATH + "american_farma_out.xlsx";
-            //    macroPath = Config.BASE_PATH + "american_farma.vbs";
-            //    user = "user";
-            //    distributor = "distributor";
-            //    date = DateTime.ParseExact("25/06/1983", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            //    year = date.Year;
-            //    month = date.Month;
-            //    day = date.Day;
-              
 
-            //}else{
-            //    inputPath = args[0];
-            //    outputPath = args[1];
-            //    macroPath = args[2];
-            //    user = args[3];
-            //    distributor = args[4];
-            //    date = DateTime.ParseExact(args[5], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            //    year = date.Year;
-            //    month = date.Month;
-            //    day = date.Day;
+
+
+            //InputPath = Config.PATH_UPLOAD + "American Farma_filipe_af.xls";
+            //OutputPath = Config.PATH_READY + "American Farma_filipe_af.xlsx";
+            //MacroPath = Config.PATH_MACRO + "american_farma.vbs";
+            //user = "filipep";
+            //distributor = "filie SA";
+            //date = DateTime.ParseExact("11/11/1999", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            //year = date.Year;
+            //month = date.Month;
+            //day = date.Day;
 
 
                 

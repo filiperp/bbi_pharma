@@ -15,7 +15,6 @@ D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.pdb
 D:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MySql.Data.dll
 D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.config
-\\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
@@ -26,8 +25,20 @@ D:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssembl
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.application
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe.manifest
 \\vmware-host\Shared Folders\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.application
+Z:\projects\bbi_pharma\MacroCli\MacroCli\bin\Debug\MacroCli.exe.config
+\\vmware-host\Shared Folders\projects\bbi_pharma\site\Debug\MacroCli.exe.config
+\\vmware-host\Shared Folders\projects\bbi_pharma\site\Debug\MacroCli.exe.manifest
+\\vmware-host\Shared Folders\projects\bbi_pharma\site\Debug\MacroCli.application
+\\vmware-host\Shared Folders\projects\bbi_pharma\site\Debug\MacroCli.exe
+\\vmware-host\Shared Folders\projects\bbi_pharma\site\Debug\MacroCli.pdb
 C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe.config
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csproj.ResolveComReference.cache
 C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe.manifest
 C:\Program Files (x86)\Ampps\www\Debug\MacroCli.application
 C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe
 C:\Program Files (x86)\Ampps\www\Debug\MacroCli.pdb
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe.manifest
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.application
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.exe
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.pdb
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache
