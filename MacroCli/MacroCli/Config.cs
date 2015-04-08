@@ -12,7 +12,9 @@ namespace MacroCli
         public static string LOG_TXT_PATH = "C:\\Program Files (x86)\\Ampps\\www\\log.txt";
         public static string PATH_UPLOAD = @"C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\uploads\\\\";
         public static string PATH_READY = @"C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\ready\\\\";
-        public static string PATH_MACRO = @"C:\\Program Files (x86)\\Ampps\\www\\macros\\";
+        public static string PATH_MACRO = @"C:\\\\Program Files (x86)\\\\Ampps\\\\www\\\\macros\\\\";
+
+
 
         //public static string PATH_UPLOAD = "../uploads/";
         //public static string PATH_READY = "../ready/";

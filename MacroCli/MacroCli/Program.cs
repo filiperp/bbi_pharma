@@ -276,7 +276,7 @@ namespace MacroCli
                 //    File.Delete(Config.PATH_READY);
 
                 //}
-                //file = new System.IO.StreamWriter(Config.LOG_TXT_PATH);
+                //file = new System.IO.StreamWriter(Config.PATH_READY);
 
 
 
@@ -343,7 +343,7 @@ namespace MacroCli
 
                     }
                     // Console.ReadKey();
-                    //file.Close();
+                   // file.Close();
                     rowsRead = true;
                 }
                 catch (Exception e)

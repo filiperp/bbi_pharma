@@ -51,3 +51,4 @@ Z:\projects\bbi_pharma\site\Debug\MacroCli.exe.manifest
 Z:\projects\bbi_pharma\site\Debug\MacroCli.application
 Z:\projects\bbi_pharma\site\Debug\MacroCli.exe
 Z:\projects\bbi_pharma\site\Debug\MacroCli.pdb
+Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Debug\MacroCli.csprojResolveAssemblyReference.cache

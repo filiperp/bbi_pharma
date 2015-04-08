@@ -8,3 +8,8 @@ Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.exe.manifest
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.application
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.exe
 Z:\projects\bbi_pharma\MacroCli\MacroCli\obj\Release\MacroCli.pdb
+C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe.config
+C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe.manifest
+C:\Program Files (x86)\Ampps\www\Debug\MacroCli.application
+C:\Program Files (x86)\Ampps\www\Debug\MacroCli.exe
+C:\Program Files (x86)\Ampps\www\Debug\MacroCli.pdb
